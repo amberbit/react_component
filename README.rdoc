@@ -1,0 +1,55 @@
+= react_componet
+
+react_component is a small gem that serves single CoffeeScript file to help you clean up your render() function in your React components.
+It is intended to be used along (react-rails)[https://github.com/reactjs/react-rails] gem.
+
+== Installation
+
+Add to your Gemfile:
+
+    gem 'react_component'
+
+Add to your components.js:
+
+    //= require react_component
+
+
+Run:
+
+    bundle
+
+Restart your Rails server.
+
+== Usage
+
+Define your components as follow:
+
+    @MyComponent = ReactComponent({
+      ...
+    })
+
+But in your Render function you can use the followint DSL (exposing all methods from React.DOM except "var" ;)):
+
+    div(null, span("Hello"))
+
+This gets way nicer if you use CoffeeScript. The DSL becomes close to slim or haml:
+
+    render: ->
+      div null,
+        h1 null, "This is some header"
+        ul null,
+          li null, "Item 1"
+          li null, "Item 2"
+          li null, "Item 3"
+
+You can always embed other components like you would before:
+
+    render: ->
+      some_component = React.createFactory(SomeComponent)(some: 'props', go: 'here')
+
+      div null,
+        h1 null, "This is some header"
+        some_component
+
+Enjoy!
+
